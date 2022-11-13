@@ -1,21 +1,21 @@
 {
-  "name": "hangover_coctails",
+  "name": "cocktails",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://andrii-petlovanyi/.github.io/hangover_coctails",
+  "homepage": "https://github.com/AnatoliiFedorenko/cocktails",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /hangover_coctails/"
+    "build": "parcel build src/*.html --public-url /cocktails/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andrii-petlovanyi/hangover_coctails.git"
+    "url": "git+https://github.com/AnatoliiFedorenko/cocktails.git"
   },
   "keywords": [],
-  "author": "Hangover",
+  "author": "Anatolii Fedorenko",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/goitacademy/parcel-project-template/issues"
+    "url": "https://github.com/AnatoliiFedorenko/cocktails/issues"
   },
   "dependencies": {
     "axios": "^1.1.3",
