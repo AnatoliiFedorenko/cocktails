@@ -3,18 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Coctails</title>
+    <title>Cocktails</title>
     <link rel="stylesheet" href="./sass/index.scss" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="/src/images/favicon_io/favicon.ico"
+    />
     <script type="module" src="./index.js"></script>
   </head>
   <body>
-    <include src="./partials/_header.html"></include>
-    <main>
-      <include src="./partials/_hero.html"></include>
-      <div id="coct_list">
+    <div class="wrapper">
+      <include src="./partials/_header.html"></include>
+      <main>
+        <include src="./partials/_hero.html"></include>
+        <!-- <div id="coct_list"> -->
         <include src="./partials/_main.html"></include>
-      </div>
-    </main>
-    <include src="./partials/_footer.html"></include>
+        <!-- </div> -->
+      </main>
+      <include src="./partials/_footer.html"></include>
+    </div>
   </body>
 </html>

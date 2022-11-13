@@ -1,9 +1,13 @@
 import { getCoctByFirstLet } from '../../api';
 import { notFound } from '../error';
 import sprite from '../../../images/svg/sprite.svg';
+import { initPagination, container } from '../pagination';
+import { refLetterSeList } from '../refs';
+import placeholder from '../../../images/placeholder.gif';
+import 'lazysizes';
 
 const FAV_COCKTAIL = 'favourites_coctails';
-export const lettersListRef = document.querySelector(`.hero__list`);
+export const lettersListRef = refLetterSeList;
 
 export function chooseLetter(evt) {
   const isLetter = evt.target.classList.contains(`hero__item`);
@@ -16,6 +20,8 @@ export function chooseLetter(evt) {
   addActiveLetterClass(parentRef);
 
   const choosedLetter = activeLetter.textContent;
+  const spanEl = document.querySelector(`.hero__js-letter`);
+  spanEl.innerHTML = choosedLetter;
 
   addMarkup(choosedLetter);
 }
@@ -23,13 +29,14 @@ async function addMarkup(letter) {
   try {
     const { data } = await getCoctByFirstLet(letter);
     if (!data.drinks) {
+      container.innerHTML = '';
       return renderError(notFound);
     }
-    renderMarkup(data.drinks);
+    initPagination(data.drinks, renderMarkup);
   } catch (error) {}
 }
 
-function removeActiveLetterClass() {
+export function removeActiveLetterClass() {
   const currentActiveLetter = document.querySelector(`.letter__is-active`);
 
   if (currentActiveLetter) {
@@ -61,7 +68,7 @@ function renderMarkup(data = []) {
           </button>`;
 
       return `<li class="coctail-card">
-        <img class="img" src=${strDrinkThumb} alt=${strDrink}/img>
+              <img class="img lazyload" src="${placeholder}" data-srcset=${strDrinkThumb} alt=${strDrink}/img>
         <h3 class="coctail-card__name">${strDrink}</h3>
         <div class="coctail-card__options">
           <button class="button-learn_more" data-id=${idDrink} data-type="learn">Learn more</button>
@@ -71,10 +78,10 @@ function renderMarkup(data = []) {
     })
     .join('');
   document.querySelector('.main-title').textContent = 'Searching results';
-  document.querySelector(`.coctails-list`).innerHTML = mark;
+  document.querySelector(`.js-main-coct`).innerHTML = mark;
 }
 
 function renderError(markup) {
   document.querySelector('.main-title').textContent = '';
-  document.querySelector(`.coctails-list`).innerHTML = markup;
+  document.querySelector(`.js-main-coct`).innerHTML = markup;
 }

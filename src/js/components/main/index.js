@@ -2,6 +2,10 @@ import { getRandCoctList } from '../../api';
 import { FAV_COCKTAIL, btnAddFav } from '../favourites/fav_cocktails';
 import { searchCoctById } from '../modal';
 import sprite from '../../../images/svg/sprite.svg';
+import placeholder from '../../../images/placeholder.gif';
+import 'lazysizes';
+
+export const refMainList = document.querySelector('.js-main-coct');
 
 export async function getListCard() {
   try {
@@ -21,7 +25,6 @@ function lengthCocktailList(arr = []) {
   ) {
     return arr.splice(0, 6);
   } else if (document.body.clientWidth > 1280) {
-    console.log(document.body.clientWidth);
     return arr.splice(0, 9);
   }
 }
@@ -44,7 +47,7 @@ export function renderMarkup(data = []) {
           </svg>
         </button>`;
       return `<li class="coctail-card">
-      <img class="img" src=${strDrinkThumb} alt=${strDrink}/img>
+      <img class="img lazyload" src="${placeholder}" data-srcset=${strDrinkThumb} alt=${strDrink}>
       <h3 class="coctail-card__name">${strDrink}</h3>
       <div class="coctail-card__options">
         <button class="button-learn_more" data-id=${idDrink} data-type="learn">Learn more</button>
@@ -53,12 +56,14 @@ export function renderMarkup(data = []) {
     </li>`;
     })
     .join('');
-  document
-    .querySelector('.coctails-list')
-    .insertAdjacentHTML('beforeend', mark);
+  refMainList.innerHTML = mark;
 }
 
-export function cardBtnListenr(e) {
-  if (e.target.dataset.type) searchCoctById(e.target.dataset.id);
-  if (e.target.dataset.add) btnAddFav(e.target.dataset.favid);
+export async function cardBtnListenr(e) {
+  if (e.target.dataset.type)
+    return await searchCoctById(
+      e.target.dataset.id,
+      e.target.nextElementSibling
+    );
+  if (e.target.dataset.add) return await btnAddFav(e.target.dataset.favid);
 }

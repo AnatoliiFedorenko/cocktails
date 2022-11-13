@@ -6,18 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Favoutites Coctails - Coctails</title>
     <link rel="stylesheet" href="./sass/index.scss" />
-    <script type="module" src="./js/components//favourites/index.js"></script>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="/src/images/favicon_io/favicon.ico"
+    />
+    <script type="module" src="./js/components/favourites/index.js"></script>
   </head>
   <body>
-    <include src="./partials/_header.html"></include>
-    <main>
-      <section class="f-coctails">
-        <div class="container f-coctails__container">
-          <h1 class="f-coctails__title">Favorite cocktails</h1>
-          <ul class="coctails-list js-add_f-coctail"></ul>
-        </div>
-      </section>
-    </main>
-    <include src="./partials/_footer.html"></include>
+    <div class="wrapper">
+      <include src="./partials/_header.html"></include>
+      <main>
+        <section class="f-coctails">
+          <div class="container f-coctails__container">
+            <h1 class="f-coctails__title">Favorite cocktails</h1>
+            <ul class="coctails-list js-add_f-coctail"></ul>
+          </div>
+          <div class="js-pagination"></div>
+        </section>
+      </main>
+      <include src="./partials/_footer.html"></include>
+    </div>
   </body>
 </html>
